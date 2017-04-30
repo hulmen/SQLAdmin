@@ -1,0 +1,11 @@
+select distinct
+#checkbox(Attributes;employee-list.display)
+from   garage, person, function, employe
+where  employe.garage_id  = garage.id and
+       employe.person_id  = person.id and
+       employe.function_id= function.id 
+       and
+#execute(City;IN;garage.city in;select distinct city from garage)
+       and
+#criteriabox(Function;function.id in;employee-list.function)
+order by garage.id
