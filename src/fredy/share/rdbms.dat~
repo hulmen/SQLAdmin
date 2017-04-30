@@ -1,0 +1,39 @@
+# this is the Database Information File for Fredy's Admin-Tool
+# insert the following entries to use it in Admin
+#
+# Version from 20. May 1999, se-afs@dial.eunet.ch
+#
+# Database-Product-Name^jdbc_driver^database-URL^Database-Port^image-file 
+# image  must be in images/
+# if you set the port to 0 then it will ignore Network stuff
+#
+MySQL Connector^com.mysql.jdbc.Driver^jdbc:mysql://^3306^mysql.gif
+mySQLmm^org.gjt.mm.mysql.Driver^jdbc:mysql://^3306^mysql.gif
+#
+Empress Network^empress.jdbc.clientDriver^jdbc:empress://localhost:8900^6322^empress.gif
+Empress Local^empress.jdbc.empressLocalDriver^jdbc:empress:DATABASE=^0^empress.gif
+Empress Server^empress.jdbc.empressServerDriver^jdbc:empress://SERVER=localhost;PORT=6322;DATABASE=^0^empress.gif
+#
+PointBase^com.pointbase.jdbc.jdbcUniversalDriver^jdbc:pointbase://^9092^pointbase.gif
+#
+PostgreSQL^org.postgresql.Driver^jdbc:postgresql://^5432^sql.gif
+#
+mSQL^com.imaginary.sql.msql.MsqlDriver^jdbc:msql://^1114^sql.gif
+#
+ORACLE^oracle.jdbc.driver.OracleDriver^jdbc:oracle:thin:^1521^oracle.gif
+#
+MS-Access^sun.jdbc.odbc.JdbcOdbcDriver^jdbc:odbc:^0^sql.gif
+#
+Instant-DB-Lutris^com.lutris.instantdb.jdbc.idbDriver^jdbc:idb:^0^instantdb.gif
+Instant-DB-Enhydra^org.enhydra.instantdb.jdbc.idbDriver^jdbc:idb:^0^instantdb.gif
+#
+Sybase^com.sybase.jdbc.SybDriver^jdbc:sybase:Tds:^2638^sybase.gif
+#
+HypersonicSQL^org.hsql.jdbcDriver^jdbc:HypersonicSQL:^0^hypersonic.gif
+#
+RMI-JDBC^RmiJdbc.RJDriver^jdbc:rmi:^0^objectweb.gif
+#
+Mckoi-local^com.mckoi.JDBCDriver^jdbc:mckoi:local://^0^mckoi.gif
+Mckoi-server^com.mckoi.JDBCDriver^jdbc:mckoi://^9157^mckoi.gif
+#
+MS-SQL-Server^com.microsoft.jdbc.sqlserver.SQLServerDriver^jdbc:microsoft:sqlserver//^1433^microsoft.gif
