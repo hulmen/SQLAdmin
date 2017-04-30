@@ -1,0 +1,120 @@
+XMLimport is part of Fredy's SQLAdmin
+
+IT has been done, to import a XML-File into a database table.
+It needs minimally two things to be used correctly:
+
+1. you need to provide a ControlFile so it knows, what to import and how
+2. you need a XML-file  containing the data you want to import.
+
+The DataFile in fact needs to have repeating entries with the same name representing
+one single database entry.  This is called here the 'DataSet' and must have a name.
+
+Much more important is the XML-description or controlfile, which leads the whole
+import-process. With this file you control what is done while the import.
+
+You provide these values:
+
+- shall the table be created
+- shall the content of the existing table be cleared before import starts
+- you can also provide  the JDBC-Driver and the connection URL within this file.
+  if these values are given, dont't add them on the commandline
+- shall the import be aborted on an error
+- the name of the table to create or use
+- the name of the dataset within the data XML file
+- describe every single attribute to be imported out of a dataset this is the part 'field'
+
+ Tabledescription follows here
+ <table>
+
+ the JDBC-Driver to use (optional)
+  <jdbcDriver>org.apache.derby.jdbc.EmbeddedDriver</jdbcDriver>
+
+ the connection URL, you need to provide this, if you've provided the JDBC-Driver
+ <connectionURL>jdbc:derby:H:\Databases\Derby\testdb</connectionURL>
+
+ the Character encoding used to import (optional)
+ <characterencoding>UTF-8</characterencoding>
+
+ if you set this switch to yes, every error will make the import interrupt
+ <abortOnError>yes|no</abortOnError</>
+
+ the Element-Name containing the dataset to be imported
+ <dataSetName>name of the dataset</dataSetName>
+
+ if you want the table to be dropped before creating it, set this value to yes
+<droptable>yes|no</droptable>
+
+if you want avoid errors if the table already exists, provide here the correct drop table command
+e.g. DROP TABLE IF EXISTS tablename 
+if this value is not provided, there will be excuted just 'drop table tablename' what might lead
+into an error and an abort of the tool if the abort-on-error-switch is set to yes
+<droptablecommand>DROP TABLE IF EXISTS tablename</droptablecommand>
+ 
+ the name of the table the data are going into
+ <tablename>enter the tablename her</tablename>
+
+ if you say 'yes' the table will be created,
+ <create>yes | no</create>
+
+ if you say yes, the first statement executed will be
+ delete from [tablename]
+ <clear>yes|no</clear>
+
+ the description of every single attribut used by the import is described here
+ <field>
+ <xmlfieldname>the name of the xml element</xmlfieldname>
+
+ below is the description of the DB-table
+  <name>fieldname</name>
+  <type>fieldtype</type>
+  <length>fieldlength</length>
+
+  add as many options as you like, options are added with a space to the create statement
+  <options>options</options>
+  <options>options</options>
+ </field>
+ </table>
+
+
+So, it might look like that:
+
+<?xml version="1.0" ?>
+<table>
+    <jdbcDriver>org.apache.derby.jdbc.EmbeddedDriver</jdbcDriver>
+    <connectionURL>jdbc:derby:H:\Databases\Derby\testdb</connectionURL>
+    <abortOnError>yes</abortOnError>
+    <dataSetName>Users</dataSetName>
+    <tablename>users2</tablename>
+    <create>no</create>
+    <clear>yes</clear>
+    <field>
+        <xmlFieldName>AccountName</xmlFieldName>
+        <name>login</name>
+        <type>VARCHAR</type>
+        <length>10</length>
+        <options>not null</options>
+    </field>
+    <field>
+        <xmlFieldName>givenname</xmlFieldName>
+        <name>firstname</name>
+        <type>VARCHAR</type>
+        <length>100</length>
+    </field>
+    <field>
+        <xmlFieldName>sn</xmlFieldName>
+        <name>lastname</name>
+        <type>VARCHAR</type>
+        <length>100</length>
+    </field>
+    <field>
+        <xmlFieldName>displayName</xmlFieldName>
+        <name>displayname</name>
+        <type>VARCHAR</type>
+        <length>200</length>
+    </field>
+    <field>
+        <xmlFieldName>Birthday</xmlFieldName>
+        <name>dateofBirth</name>
+        <type>date</type>
+    </field>
+</table>
