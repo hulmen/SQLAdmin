@@ -1,0 +1,34 @@
+select distinct
+#checkbox(Attributes;car-list.display)
+from   car,
+       brand,
+       model,
+       make,
+       new_used,
+       garage,
+       person,
+       employe,
+       function
+where  car.model_id       = model.id    and
+       model.brand_id     = brand.id    and
+       model.make_id      = make.id     and
+       car.new_used_id    = new_used.id and
+       car.garage_id      = garage.id   and       
+       person.garage_id   = garage.id   and
+       employe.person_id  = person.id   and
+       employe.function_id= function.id 
+and
+#execute(Brand;IN;brand.brand in;select distinct brand.brand from brand) 
+and
+#execute(Make;IN;make.make in;select distinct make.make from make)
+and
+#execute(New / Used;IN;new_used.value in;select distinct new_used.value from new_used)
+and
+#execute(City;IN;garage.city in;select distinct city from garage)
+and
+#execute(Color;IN;car.color in;select distinct car.color from car)
+and
+#execute(Engine;IN;model.fuel in;select distinct fuel from model)
+#between(Mileage;car.mileage;1;and;zahl)
+order by garage.id
+

@@ -1,0 +1,9 @@
+SELECT DISTINCT
+#checkbox(Datenausgabe;ch_ausl_org.out)
+FROM   ausl_organisationen_v
+#selectiongui(VSA Kriterien;vsa_auslinnerjoin.cnd)
+INNER JOIN ch_organisationen_v ON (vsa.partner_oid = ch_organisationen_v.partner_oid)
+WHERE
+#selectiongui(CH-Organisationskriterien;org_kriterien.cnd)
+AND
+#selectiongui(Ausl-Organisationskriterien;auslorg_kriterien.cnd)

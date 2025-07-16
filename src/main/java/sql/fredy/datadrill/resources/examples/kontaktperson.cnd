@@ -1,0 +1,2 @@
+and
+#execute(Selektionstatus;IN;kont.selektionssperre_status in;select sperrestatus from gui_sperrestatus_v)

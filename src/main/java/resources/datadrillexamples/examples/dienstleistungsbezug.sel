@@ -1,0 +1,6 @@
+SELECT DISTINCT
+#checkbox(Datenausgabe;dienstleistungsbezug.out)
+FROM dienstleistungsbezug_partner_v
+WHERE
+#selectiongui(Person-Kriterien;dienstleistungsbezug.cnd)
+

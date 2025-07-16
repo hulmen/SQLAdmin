@@ -1,0 +1,7 @@
+SELECT DISTINCT
+#checkbox(Datenausgabe;person.out)
+FROM vip_v
+	   INNER JOIN vipaspekt_v  ON vip_v.partner_oid = vipaspekt_v.partner_oid
+WHERE
+#selectiongui(Person-Kriterien;person.cnd)
+

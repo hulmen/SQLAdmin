@@ -1,0 +1,6 @@
+SELECT DISTINCT
+#checkbox(Datenausgabe;ch_org_interesse_taetigkeit.out)
+FROM   ch_organisationen_v
+#include interesse_taetig.gui
+WHERE
+#include ch_organisation.gui

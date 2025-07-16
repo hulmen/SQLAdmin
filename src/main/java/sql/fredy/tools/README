@@ -1,0 +1,75 @@
+   Fredy's Simple Log Server
+   -------------------------
+   SimpleLogServer is a tool I did to enhance my sql-Admin package.
+   http://www.hulmen.ch/admin
+
+   SimpleLogServer is based onto java.util.logging and therefore
+   needs to have in minimum jdk 1.4 underneath.
+
+   SimpleLogServer is listenning onto a port ( default: 5237 )
+   It receives java.util.logging.LogRecord and logs it into
+   the default log-environment. To change file-names and LogHandlers
+   see the  /usr/java/jre/lib/logging.properties file (or wherever
+   this file in your OS is), so you can easily change this by giving
+   the VM the parameter -Djava.util.logging.config.file= [FILE]
+
+   Additionally it allows to display the LogRecords within a GUI if
+   you launch it via -GUI parameter.
+
+   Parameters: -p   port to listen onto (default: 5237 )
+               -GUI launch GUI
+               -c   Capacity of the GUI-Buffer, if capacity is reached
+	            the upper half of the text is deleted. This value
+	            is set per defaqult to 4096
+   
+   As I do not know, where to put the logging.dtd and to use it, you
+   have to set sql.fredy.tools.FxmlFormatter as the Formatter for the 
+   java.util.loggin.SocketHandler.formatter. So do not forget to add
+   sls.jar to you CLASSPATH.
+
+   If someone knows a solution, I'm really interested to hear about.
+   I took the ideas to the server from David Flanagans 'Java in a Nutshell'
+
+   change your logging.properties file of the clients as follows:
+   ( it is in [your-location]/jre/lib/logging.properties )
+
+   1) add java.util.logging.SocketHandler to the handlers-property
+   2) add the SocketHandler Properties as follows:
+      
+        java.util.logging.SocketHandler.formatter = sql.fredy.tools.FxmlFormatter
+        java.util.logging.SocketHandler.level = INFO 
+        java.util.logging.SocketHandler.host =  sls-server-hostname
+        java.util.logging.SocketHandler.port = 5237 
+  
+	(where INFO is the lowest level to log,
+	       sls-server-hostname is the server running my SimpleLogServer
+               port is the port you defined while starting sls.
+
+   adapt your Server-side logging properties according your needs, as the server
+   is using standard LogManager properties and creating LogRecords, it relies onto
+   the standard properties.
+
+
+   To test sls, just start on the server java -jar logtest.jar to have a very simple
+   tester.
+
+
+    Copyright (c) 2017 Fredy Fischer, sql@hulmen.ch
+    
+   Permission is hereby granted, free of charge, to any person obtaining a copy 
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+  
+   The above copyright notice and this permission notice shall be included in
+   all copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.

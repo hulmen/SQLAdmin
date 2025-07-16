@@ -1,0 +1,33 @@
+# this is the Database Information File for Fredy's Admin-Tool
+# insert the following entries to use it in Admin
+#
+# sql@hulmen.ch
+#
+# Database-Product-Name^jdbc_driver^database-URL^Database-Port^image-file 
+# image  must be in images/
+# if you set the port to 0 then it will ignore Network stuff
+#
+MySQL Connector J^com.mysql.cj.jdbc.Driver^jdbc:mysql://^3306^mysql.gif
+#
+MariaDB^org.mariadb.jdbc.Driver^jdbc:mariadb://^3306^mysql.gif
+#
+PostgreSQL^org.postgresql.Driver^jdbc:postgresql://^5432^sql.gif
+#
+ORACLE^oracle.jdbc.driver.thin^jdbc:oracle:thin:^1521^oracle.gif
+#
+ORACLE^oracle.jdbc.driver.oci^jdbc:oracle:oci:^1521^oracle.gif
+#
+ORACLE withTNS^oracle.jdbc.driver.OracleDriver^put the TNSname in additional parameters:tnsname={tnsname}^0^oracle.gif
+#
+MS-Access^net.ucanaccess.jdbc.UcanaccessDriver^jdbc:ucanaccess:^0^sql.gif
+#
+RMI-JDBC^RmiJdbc.RJDriver^jdbc:rmi:^0^objectweb.gif
+#
+MS-SQL-Server^com.microsoft.sqlserver.jdbc.SQLServerDriver^jdbc:sqlserver://^1433^microsoft.gif
+#
+DerbyEmbedded^org.apache.derby.jdbc.EmbeddedDriver^jdbc:derby:^0^sql.gif
+#
+DerbyClient^org.apache.derby.jdbc.ClientDriver^jdbc:derby://^1527^sql.gif
+#
+SQLite^org.sqlite.JDBC^jdbc:sqlite:^0^sql.gif
+#

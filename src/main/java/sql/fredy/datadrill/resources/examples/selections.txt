@@ -1,0 +1,24 @@
+AUSL-Firmen;ausl_org.sel
+Deaktivierte Adressen;deaktiviert.sel
+Dienstleistungsbezug;dienstleistungsbezug.sel
+CH-Firmen;ch_org.sel
+CH-Firmen (SED-Klassifikation);ch_org_produkt.sel
+CH-Firmen (Taetigkeit & Interessen);ch_org_interesse_taetigkeit.sel
+CH-Firmen (VSA);ch_org_vsa.sel
+CH-Firmen (SED-Klassifikation & Tätigkeit & Interessen);ch_org_produkt_interesse_taetigkeit.sel
+CH-Firmen (SED-Klassifikation & VSA );ch_org_vsa_produkt.sel
+CH-Firmen (Taetigkeit & Interessen & VSA);ch_org_vsa_interesse_taetigkeit.sel
+CH-Firmen (SED-Klassifikation & Tätigkeit & Interesse & VSA);ch_org_vsa_produkt_interesse_taetigkeit.sel
+CH-Firmen (Kontakte);ch_org_pers.sel
+CH-Firmen (Kontakte & SED-Klassifikation);ch_org_pers_produkt.sel
+CH-Firmen (Kontakte & Taetigkeit & Interessen);ch_org_pers_interesse_taetigkeit.sel
+CH-Firmen (Kontakte & VSA);ch_org_pers_vsa.sel
+CH-Firmen (Kontakte & SED-Klassifikation & Tätigkeit & Interessen);ch_org_pers_produkt_interesse_taetigkeit.sel
+CH-Firmen (Kontakte & SED-Klassifikation & VSA);ch_org_pers_vsa_produkt.sel
+CH-Firmen (Kontakte & Taetigkeit & Interessen & VSA);ch_org_pers_vsa_interesse_taetigkeit.sel
+CH-Firmen (Kontakte & SED-Klassifikation & Taetigkeit & Interessen & VSA);ch_org_pers_vsa_produkt_interesse_taetigkeit.sel
+Osec-Mitglieder;mitglieder.sel
+Osec-Mitglieder Personen;mitglieder_pers.sel
+Versaende;versand.sel
+VIP;person.sel
+VSA;ch_ausl_org.sel

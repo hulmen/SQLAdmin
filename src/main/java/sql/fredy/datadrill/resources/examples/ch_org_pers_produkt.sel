@@ -1,0 +1,7 @@
+SELECT distinct
+#checkbox(Datenausgabe;ch_org_pers_produkt.out)
+FROM   ch_organisationen_v
+#include kontaktperson.gui
+#include sed_klassifikation.gui
+WHERE
+#include ch_organisation.gui

@@ -1,0 +1,11 @@
+garage.name;Name of the Garage;Garage
+garage.street;Street of the Garage;Street
+garage.zip;Postalcode of the Garage;ZIP
+garage.city;City of the garage;City
+garage.email;E-Mail of the Garage;E-Mail
+garage.phone;Phone of the Garage;Phone
+person.firstname;Firstname of Employee;Firstname
+person.lastname;Lastname of Employee;Lastname
+person.phone;Employee direct Phone;Direct
+function.function;Function;Function
+

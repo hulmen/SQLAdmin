@@ -1,0 +1,1 @@
+#execute(Dienstleistungen;IN;dienstleistungsbezug_partner_v.dienstleistung IN;SELECT name FROM gui_dienstleistungen_v)

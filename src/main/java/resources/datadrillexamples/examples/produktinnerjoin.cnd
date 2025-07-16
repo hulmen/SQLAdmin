@@ -1,0 +1,17 @@
+INNER JOIN (
+ SELECT partner_oid
+ , 		sektor_cd
+ , 		sektor_name
+ , 		branche_cd
+ , 		branche_name
+ , 		produkt_cd
+ , 		produkt_name
+ FROM	klassifikation_v
+ WHERE
+#between(Sektoren;sektor_cd;50;or;text)
+OR
+#between(Branchen;branche_cd;50;or;text)
+OR
+#between(Produkte;produkt_cd;50;or;text)
+) kla on kla.partner_oid = ch_organisationen_v.partner_oid
+

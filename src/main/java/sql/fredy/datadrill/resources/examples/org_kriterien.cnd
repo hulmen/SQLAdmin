@@ -1,0 +1,21 @@
+#execute(Kanton;IN;ch_organisationen_v.vsd_landteil in;select kanton from GUI_Kantone_v)
+and
+#execute(Organisationszweck;IN;ch_organisationen_v.organisationszweck in;select organisationszweck from gui_organisationszweck_v)
+and
+#criteriabox(Anz. MA;ch_organisationen_v.anzahl_mitarbeiter in;anzahlmitarbeiter.txt)
+and
+#criteriabox(Exportanteil;ch_organisationen_v.exportanteil in;exportanteil.txt)
+and
+#criteriabox(Gesamtumsatz;ch_organisationen_v.gesamtumsatz in;gesamtumsatz.txt)
+and
+#between(PLZ;ch_organisationen_v.plz;20;or;text)
+and
+#execute(Sprache;IN;ch_organisationen_v.sprache in;select name from gui_sprache_v)
+and
+#execute(Bonität;IN;ch_organisationen_v.bonitaet in;select bonitaet from gui_bonitaet_v)
+and
+#execute(Gesellschaftsform;IN;ch_organisationen_v.gesellschaftsform in;select gesellschaftsform from gui_gesellschaftsform_v)
+and
+#execute(SED;IN;ch_organisationen_v.sed in;select janein from gui_janein_v)
+and
+#between(Kunden Nr.;ch_organisationen_v.kundennummer;20;or;text)

@@ -1,0 +1,24 @@
+vip_v.ORGANISATION_OID;ORGANISATION_OID;ORGANISATION_OID
+vip_v.PARTNER_OID;KONTAKTPERSON_OID;KONTAKTPERSON_OID
+vip_v.partnertyp; Partnertyp;Partnertyp
+vip_v.sprache;Sprache;Sprache
+vip_v.kundennummer;Kundennummer;Kundennummer
+vip_v.org_name;Name (ORG);Name ORG
+vip_v.org_namezusatz;Namezusatz (ORG);Namezusatz ORG
+vip_v.anschrift;Anschrift;Anschrift
+vip_v.anrede;Anrede;Anrede
+vip_v.titel;Titel;Titel
+vip_v.name;Name;Name
+vip_v.vorname;Vorname;Vorname
+vip_v.telefon;Telefon;Telefon
+vip_v.telefax;Telefax;Telefax
+vip_v.email;E-Mail;E-Mail
+vip_v.url;URL;URL
+vip_v.strasse;Strasse;Strasse
+vip_v.haus_nr;Haus Nr.;Haus Nr.
+vip_v.plz;PLZ;PLZ
+vip_v.ort;Ort;Ort
+vip_v.postfach;Postfach;Postfach
+vip_v.landteil;Landteil;Landteil
+vip_v.land;Land;Land
+vip_v.vip;VIP-Name;VIP-Name

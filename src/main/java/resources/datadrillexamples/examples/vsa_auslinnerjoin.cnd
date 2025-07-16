@@ -1,0 +1,18 @@
+INNER JOIN (
+SELECT 	partner_oid,
+  vertreter_partner_oid,
+  vsaart,
+	landgruppe,
+	land
+FROM vsa
+WHERE
+(
+#execute(Land;IN;vsa.land in;select name from gui_land_v)
+or
+#execute(Landgruppe;IN;vsa.landgruppe in;select landgruppe from gui_landgruppe_v)
+)
+and
+#execute(VSA Art;IN;vsa.vsaart in;select vsaart from gui_vsaart_v)
+)
+vsa ON (vsa.vertreter_partner_oid = ausl_organisationen_v.partner_oid)
+

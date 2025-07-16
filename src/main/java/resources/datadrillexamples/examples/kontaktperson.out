@@ -1,0 +1,12 @@
+kont.kontaktpers_oid;KONTAKTPERSON_OID;KONTAKTPERSON_OID
+kont.postanschrift;Postanschrift;postanschrift
+NVL(kont.briefanrede,ch_organisationen_v.briefanrede);Briefanrede;briefanrede
+kont.titel;Titel;Titel
+kont.abteilung;Abteilung Kontakt;abteilung_kontakt
+kont.name;Name Kontaktperson;name_kontakt
+kont.vorname;Vorname Kontaktperson;vorname_kontakt
+kont.telefon;Telefon Kontakt;telefon_kontakt
+kont.natel;Natel Kontakt;natel_kontakt
+kont.telefax;Fax Kontakt;fax_kontakt
+kont.email;E-Mail Kontakt;email_kontakt
+kont.funktion;Funktion Kontakt;funktion_kontakt

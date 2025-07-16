@@ -1,0 +1,5 @@
+SELECT distinct
+#checkbox(Datenausgabe;versand.out)
+FROM   versand_v
+WHERE
+#include versand.gui

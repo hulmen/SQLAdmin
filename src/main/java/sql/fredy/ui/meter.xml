@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description>
+     this is to describe the behaviour of the
+     Speedometer
+<description>
+<poll-rate>1000</poll-rate>
+<host>localhost</host>
+<user>username</user>
+<password>password</password>
+<sql-loop>
+      <statement>
+        show status
+      </statement>
+      <keyword>
+          <position>1</position>
+          <search>Open_tables</search>
+      </keyword>
+      <value>
+	  <position>2</position>
+          <return-type>int</return-type>
+      </value>
+      <description>
+          open tables 
+      </description>
+</sql-loop>
+<sql-loop>
+      <statement>
+        show status
+      </statement>
+      <keyword>
+          <position>1</position>
+          <search>Open_files</search>
+      </keyword>
+      <value>
+	  <position>2</position>
+          <return-type>int</return-type>
+      </value>
+      <description>
+          open files 
+      </description>
+</sql-loop>
+<sql-loop>
+      <statement>
+        show status
+      </statement>
+      <keyword>
+          <position>1</position>
+          <search>Threads_connected</search>
+      </keyword>
+      <value>
+	  <position>2</position>
+          <return-type>int</return-type>
+      </value>
+      <description>
+          actually connected Threads 
+      </description>
+</sql-loop>
+<sql>
+      <statement>
+        select count(*) from adressen
+      </statement>
+      <return-type>int</return-type>
+      <description>
+          actual count of records in adressen 
+      </description>
+</sql>
+<script-numeric>
+      <executable>ascript.sh</executable>
+      <return-type>int</return-type>            
+      <description>
+          something really cool 
+      </description>
+</script-numeriy>
+<script-text>
+       <executable>ping</executable>
+       <parameter>takeoff</parameter>
+       <return-value>is alive</return-value>
+      <description>
+          pings takeoff
+      </description>
+</script-text>
+
+
+    

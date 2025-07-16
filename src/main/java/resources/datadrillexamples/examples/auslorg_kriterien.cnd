@@ -1,0 +1,13 @@
+#execute(Organisationszweck;IN;ausl_organisationen_v.organisationszweck in;select organisationszweck from gui_organisationszweck_v)
+and
+#criteriabox(Anz. MA;ausl_organisationen_v.anzahl_mitarbeiter in;anzahlmitarbeiter.txt)
+and
+#between(PLZ;ausl_organisationen_v.plz;20;or;text)
+and
+#execute(Sprache;IN;ausl_organisationen_v.sprache in;select name from gui_sprache_v)
+and
+#execute(Bonität;IN;ausl_organisationen_v.bonitaet in;select bonitaet from gui_bonitaet_v)
+and
+#execute(Gesellschaftsform;IN;ausl_organisationen_v.gesellschaftsform in;select gesellschaftsform from gui_gesellschaftsform_v)
+and
+#execute(Land;IN;ausl_organisationen_v.org_land in;select name from gui_land_v)

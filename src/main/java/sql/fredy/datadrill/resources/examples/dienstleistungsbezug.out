@@ -1,0 +1,22 @@
+dienstleistungsbezug_partner_v.partnertyp; Partnertyp;Partnertyp
+dienstleistungsbezug_partner_v.sprache;Sprache;Sprache
+dienstleistungsbezug_partner_v.kundennummer;Kundennummer;Kundennummer
+dienstleistungsbezug_partner_v.org_name;Name (ORG);Name ORG
+dienstleistungsbezug_partner_v.org_namezusatz;Namezusatz (ORG);Namezusatz ORG
+dienstleistungsbezug_partner_v.anschrift;Anschrift;Anschrift
+dienstleistungsbezug_partner_v.anrede;Anrede;Anrede
+dienstleistungsbezug_partner_v.titel;Titel;Titel
+dienstleistungsbezug_partner_v.name;Name;Name
+dienstleistungsbezug_partner_v.vorname;Vorname;Vorname
+dienstleistungsbezug_partner_v.telefon;Telefon;Telefon
+dienstleistungsbezug_partner_v.telefax;Telefax;Telefax
+dienstleistungsbezug_partner_v.email;E-Mail;E-Mail
+dienstleistungsbezug_partner_v.url;URL;URL
+dienstleistungsbezug_partner_v.strasse;Strasse;Strasse
+dienstleistungsbezug_partner_v.haus_nr;Haus Nr.;Haus Nr.
+dienstleistungsbezug_partner_v.plz;PLZ;PLZ
+dienstleistungsbezug_partner_v.ort;Ort;Ort
+dienstleistungsbezug_partner_v.postfach;Postfach;Postfach
+dienstleistungsbezug_partner_v.landteil;Landteil;Landteil
+dienstleistungsbezug_partner_v.land;Land;Land
+dienstleistungsbezug_partner_v.dienstleistung;Dienstleistung;Dienstleistung

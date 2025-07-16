@@ -1,0 +1,8 @@
+SELECT distinct
+#checkbox(Datenausgabe;ch_org_vsa_produkt_interesse_taetigkeit.out)
+FROM   ch_organisationen_v
+#include vsa.gui
+#include sed_klassifikation.gui
+#include interesse_taetig.gui
+WHERE
+#include ch_organisation.gui

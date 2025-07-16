@@ -1,0 +1,12 @@
+    <   1 Mio. Fr.;'    <   1 Mio. Fr.'
+  1 -   5 Mio. Fr.;'  1 -   5 Mio. Fr.'
+  5 -  10 Mio. Fr.;'  5 -  10 Mio. Fr.'
+ 10 -  25 Mio. Fr.;' 10 -  25 Mio. Fr.'
+ 25 -  50 Mio. Fr.;' 25 -  50 Mio. Fr.'
+ 50 - 100 Mio. Fr.;' 50 - 100 Mio. Fr.'
+100 - 150 Mio. Fr.;'100 - 150 Mio. Fr.'
+150 - 200 Mio. Fr.;'150 - 200 Mio. Fr.'
+200 - 250 Mio. Fr.;'200 - 250 Mio. Fr.'
+   > 250  Mio. Fr.;'   > 250  Mio. Fr.'
+UNDEFINIERT;'UNDEFINIERT'
+

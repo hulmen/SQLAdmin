@@ -1,0 +1,8 @@
+SELECT distinct
+#checkbox(Datenausgabe;ch_org_pers_vsa_interesse_taetigkeit.out)
+FROM   ch_organisationen_v
+#include kontaktperson.gui
+#include interesse_taetig.gui
+#include vsa.gui
+WHERE
+#include ch_organisation.gui

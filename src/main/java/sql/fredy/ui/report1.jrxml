@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6160bb35-55e8-4293-827d-f1c28c0ce201">
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     CAR."ID" AS CAR_ID,
+     CAR."MODEL_ID" AS CAR_MODEL_ID,
+     CAR."NEW_USED_ID" AS CAR_NEW_USED_ID,
+     CAR."GARAGE_ID" AS CAR_GARAGE_ID,
+     CAR."MILEAGE" AS CAR_MILEAGE,
+     CAR."COLOR" AS CAR_COLOR,
+     CAR."CARDATE" AS CAR_CARDATE,
+     CAR."PRICE" AS CAR_PRICE,
+     BRAND."ID" AS BRAND_ID,
+     BRAND."BRAND" AS BRAND_BRAND,
+     MODEL."ID" AS MODEL_ID,
+     MODEL."BRAND_ID" AS MODEL_BRAND_ID,
+     MODEL."MAKE_ID" AS MODEL_MAKE_ID,
+     MODEL."MODEL" AS MODEL_MODEL,
+     MODEL."CYLINDERS" AS MODEL_CYLINDERS,
+     MODEL."CAPACITY" AS MODEL_CAPACITY,
+     MODEL."FUEL" AS MODEL_FUEL,
+     MODEL."DOORS" AS MODEL_DOORS
+FROM
+     "AFS"."BRAND" BRAND INNER JOIN "AFS"."MODEL" MODEL ON BRAND."ID" = MODEL."BRAND_ID"
+     INNER JOIN "AFS"."CAR" CAR ON MODEL."ID" = CAR."MODEL_ID"]]>
+	</queryString>
+	<field name="CAR_ID" class="java.lang.Integer"/>
+	<field name="CAR_MODEL_ID" class="java.lang.Integer"/>
+	<field name="CAR_NEW_USED_ID" class="java.lang.Integer"/>
+	<field name="CAR_GARAGE_ID" class="java.lang.Integer"/>
+	<field name="CAR_MILEAGE" class="java.lang.Integer"/>
+	<field name="CAR_COLOR" class="java.lang.String"/>
+	<field name="CAR_CARDATE" class="java.sql.Date"/>
+	<field name="CAR_PRICE" class="java.lang.Double"/>
+	<field name="BRAND_ID" class="java.lang.Integer"/>
+	<field name="BRAND_BRAND" class="java.lang.String"/>
+	<field name="MODEL_ID" class="java.lang.Integer"/>
+	<field name="MODEL_BRAND_ID" class="java.lang.Integer"/>
+	<field name="MODEL_MAKE_ID" class="java.lang.Integer"/>
+	<field name="MODEL_MODEL" class="java.lang.String"/>
+	<field name="MODEL_CYLINDERS" class="java.lang.Integer"/>
+	<field name="MODEL_CAPACITY" class="java.lang.Double"/>
+	<field name="MODEL_FUEL" class="java.lang.String"/>
+	<field name="MODEL_DOORS" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="5a4e572a-2b02-4137-9777-6a918c374b95"/>
+				<staticText>
+					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="f5d87cec-172c-4047-b36c-0f5112f07312"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TITLE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="5b051b20-3855-478d-b4d1-716436eca909"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Add a description here]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="86f97e7e-160f-4ae9-a044-6f833036a379"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="30ba095f-e139-406b-801f-c4cd536facf0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="30" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e5417183-a157-4a49-aa52-f6b8d76771d2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_MODEL_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a4cbfdb1-c01e-4f04-b7f8-27df11c90ed6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_NEW_USED_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="90" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7474027c-274a-400d-8c4a-20a0542ffde6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_GARAGE_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="120" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="bc986aba-f0ce-40fd-aa36-cd0886124838"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_MILEAGE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="150" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e8bb2710-a803-449d-a7c1-a8fb272cfbd8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_COLOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="180" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7a7baf28-f869-44f7-9066-04375b438f28"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_CARDATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="210" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e95af030-4fc4-40e1-bd5e-8cd512af9e36"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAR_PRICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="240" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="fcffc939-9cc7-4357-a365-6f742b567ee0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BRAND_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="c728aa95-04fe-4dd2-821b-a77217aee3a4"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BRAND_BRAND]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="300" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ef691381-7e04-4fab-89d0-c2182e879af9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="330" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="431c2ecf-5600-4b50-a1f2-b585479a4b9e"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_BRAND_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="360" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="bb54cf3e-fcfc-48db-ba0e-77b2bfaaa575"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_MAKE_ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="390" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b1f841d-a610-4621-954c-865495956742"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_MODEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="420" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b2085dea-8fd7-4143-8d18-696248b7a9f0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_CYLINDERS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="450" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5e6d1e9a-83df-41f3-9c3a-18405f185473"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_CAPACITY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="480" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5945f1d4-9e2a-4929-ab66-6c0a10c1c3e2"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_FUEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="510" y="0" width="30" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="f4e466bb-bc57-4b1f-8888-83ea7e8bda32"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MODEL_DOORS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="745dbe84-fa03-4805-9915-793cb5429120"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="30" height="20" uuid="6bdd5ed1-7510-42f8-8205-eaa205ca855b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="30" y="0" width="30" height="20" uuid="185e7ff5-c796-4f9a-834e-5c9d390674fa"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_MODEL_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="60" y="0" width="30" height="20" uuid="3cd25fb3-4244-4819-ad9d-3329032bc21b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_NEW_USED_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="90" y="0" width="30" height="20" uuid="aae03cfb-6376-43f2-9282-6b6c30c96bc8"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_GARAGE_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="120" y="0" width="30" height="20" uuid="40ed5c35-847d-4c05-973a-d3e9d8f4b8bd"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_MILEAGE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="150" y="0" width="30" height="20" uuid="a86cab36-6c40-4bbf-8429-397ba618398b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_COLOR}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="180" y="0" width="30" height="20" uuid="c507d128-d1a0-4e25-883c-543e049e91df"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_CARDATE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="210" y="0" width="30" height="20" uuid="e0f5c75a-9b74-4478-a5b9-bac63271258b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAR_PRICE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="240" y="0" width="30" height="20" uuid="c7598f80-b3ed-49e0-b944-a5b047a32872"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BRAND_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="270" y="0" width="30" height="20" uuid="2d4b7b1e-aa4d-413a-8557-9959e221af9a"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BRAND_BRAND}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="300" y="0" width="30" height="20" uuid="9a9b928b-e68c-477f-bf6b-308380d7b0bb"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="330" y="0" width="30" height="20" uuid="6fc48f7f-1687-4b18-a27f-b86b0ec494b5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_BRAND_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="360" y="0" width="30" height="20" uuid="44afbe45-a559-4790-89ee-a1c6b1fee9ac"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_MAKE_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="390" y="0" width="30" height="20" uuid="02657f8a-2a74-4ac6-9408-4eef756c8776"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_MODEL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="420" y="0" width="30" height="20" uuid="e7ce0bdc-adea-4d48-b6e7-76a0cf62d6e4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_CYLINDERS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="450" y="0" width="30" height="20" uuid="bdf832e4-b81c-44f4-8661-986ee5eb3e06"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_CAPACITY}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="480" y="0" width="30" height="20" uuid="77ffc3c9-a7a9-4279-9783-e5f156d003df"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_FUEL}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="510" y="0" width="30" height="20" uuid="25248617-36c4-4e44-b9fe-53c922e22a36"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MODEL_DOORS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="d044d94f-ad5e-4a38-aa92-cd46862f2be4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="0d407dda-d4ca-4ab7-b245-dff11b75bdfa"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="9479607e-fa91-439c-9080-52fc7253737c"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

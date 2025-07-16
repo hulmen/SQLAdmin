@@ -1,0 +1,6 @@
+SELECT DISTINCT
+#checkbox(Datenausgabe;mitglieder.out)
+FROM   ch_organisationen_v
+#include mitglied.gui
+WHERE
+#include ch_organisation.gui

@@ -1,0 +1,18 @@
+INNER JOIN (
+SELECT 	partner_oid
+,   markttyp
+,		landgruppe
+,		land
+ FROM   interessen_taetigkeiten_v
+WHERE
+(
+#execute(Markttyp;IN; markttyp in;select markttyp from gui_markttyp)
+and
+(
+#execute(Land;IN;land in;select name from gui_land_v)
+or
+#execute(Landgruppe;IN;landgruppe in;select landgruppe from gui_landgruppe_v)
+)
+)
+)
+int_taet ON ( int_taet.partner_oid = ch_organisationen_v.partner_oid )

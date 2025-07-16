@@ -1,0 +1,22 @@
+brand.brand;Brand;Brand
+model.model;Model;Model
+make.make;Type;Type
+model.cylinders;Cylinders;Cylinders
+model.capacity;ccm;ccm
+model.fuel;Engine Type;Engine Type
+model.doors;Doors;Doors
+new_used.value;New / Used;New / Used
+car.mileage;Mileage;Mileage
+car.color;Color;Color
+car.price;Price;Price
+car.date;Date;Date
+garage.name;Garage;Garage
+garage.street;Street;Street
+garage.zip;ZIP;ZIP
+garage.city;City;City
+garage.email;E-Mail;E-Mail
+garage.phone;Phone;Phone
+person.firstname;Firstname;Firstname
+person.lastname;Lastname;Lastname
+person.phone;Directphone;DirectPhone
+

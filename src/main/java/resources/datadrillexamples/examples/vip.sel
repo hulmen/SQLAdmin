@@ -1,0 +1,7 @@
+SELECT DISTINCT
+#checkbox(Datenausgabe;vip.out)
+FROM vip_v
+	   INNER JOIN vipaspekt_v  USING (partner_oid)
+WHERE
+#selectiongui(Person-Kriterien;vip.cnd)
+

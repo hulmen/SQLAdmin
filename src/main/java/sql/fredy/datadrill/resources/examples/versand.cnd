@@ -1,0 +1,1 @@
+#execute(Versandtyp;IN;versand_v.versand in;select versandtyp from gui_versandtyp_v)

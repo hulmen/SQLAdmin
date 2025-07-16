@@ -1,0 +1,5 @@
+SELECT distinct
+#checkbox(Datenausgabe;ch_org.out)
+FROM   ch_organisationen_v
+where
+#include ch_organisation.gui

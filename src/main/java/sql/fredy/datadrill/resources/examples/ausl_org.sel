@@ -1,0 +1,5 @@
+SELECT DISTINCT
+#checkbox(Datenausgabe;ausl_org.out)
+FROM   ausl_organisationen_v
+WHERE
+#include ausl_organisation.gui

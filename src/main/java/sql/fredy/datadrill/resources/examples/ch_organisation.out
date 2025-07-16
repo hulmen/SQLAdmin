@@ -1,0 +1,30 @@
+ch_organisationen_v.partner_oid;ORGANISATION_OID;ORGANISATION_OID
+ch_organisationen_v.kundennummer;Kundennummer;Kundennummer
+ch_organisationen_v.name;Organisationsname;Organisationsname
+ch_organisationen_v.namezusatz;Namezusatz;Namezusatz
+ch_organisationen_v.sprache;Sprache;Sprache
+ch_organisationen_v.mitglied;Mitglied;Mitglied
+ch_organisationen_v.mitgliedschaftsstatus;Mitgliedschaftsstatus;Mitgliedschaftsstatus
+ch_organisationen_v.kundenstatus;Kundenstatus;Kundenstatus
+ch_organisationen_v.anzahl_mitarbeiter;Mitarbeiter;Mitarbeiter
+ch_organisationen_v.exportanteil;Exportanteil;Exportanteil
+ch_organisationen_v.gesamtumsatz;Gesamtumsatz;Gesamtumsatz
+ch_organisationen_v.organisationszweck;Organisationszweck;Organisationszweck
+ch_organisationen_v.telefon;Telefon Org;Telefon Org
+ch_organisationen_v.telefax;Telefax Org;Telefax Org
+ch_organisationen_v.email;E-Mail Org;E-Mail Org
+ch_organisationen_v.url;URL;URL
+ch_organisationen_v.gft_strasse;Strasse ( G );Strasse ( G )
+ch_organisationen_v.gft_haus_nr;Haus Nr ( G );Haus Nr ( G )
+ch_organisationen_v.gft_postfach;Postfach ( G );Postfach ( G )
+ch_organisationen_v.gft_plz;PLZ ( G );PLZ ( G )
+ch_organisationen_v.gft_ort;Ort ( G );Ort ( G )
+ch_organisationen_v.gft_landteil;Landteil ( G );Landteil ( G )
+ch_organisationen_v.gft_land;Land ( G );Land ( G )
+ch_organisationen_v.vsd_strasse;Strasse ( V );Strasse ( V )
+ch_organisationen_v.vsd_haus_nr;Haus Nr ( V );Haus Nr ( V )
+ch_organisationen_v.vsd_postfach;Postfach ( V );Postfach ( V )
+ch_organisationen_v.vsd_plz;PLZ ( V );PLZ ( V )
+ch_organisationen_v.vsd_ort;Ort ( V );Ort ( V )
+ch_organisationen_v.vsd_landteil;Landteil ( V );Landteil ( V )
+ch_organisationen_v.vsd_land;Land ( V );Land ( V )

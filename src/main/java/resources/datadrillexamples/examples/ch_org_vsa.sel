@@ -1,0 +1,7 @@
+SELECT distinct
+#checkbox(Datenusgabe;ch_org_vsa.out)
+FROM   ch_organisationen_v
+#include vsa.gui
+WHERE
+#include ch_organisation.gui
+

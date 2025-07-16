@@ -1,0 +1,17 @@
+ausl_organisationen_v.kundennummer;Kundennummer;Kundennummer
+ausl_organisationen_v.name;Organisationsname;Organisationsname
+ausl_organisationen_v.namezusatz;Namezusatz;Namezusatz
+ausl_organisationen_v.sprache;Sprache;Sprache
+ausl_organisationen_v.anzahl_mitarbeiter;Anzahl Mitarbeiter;Mitarbeiter
+ausl_organisationen_v.organisationszweck;Organisationszweck;Organisationszweck
+ausl_organisationen_v.telefon;Telefon Org;Telefon Org
+ausl_organisationen_v.telefax;Telefax Org;Telefax Org
+ausl_organisationen_v.email;E-Mail Org;E-Mail Org
+ausl_organisationen_v.url;URL;URL
+ausl_organisationen_v.vsd_strasse;Strasse;Strasse
+ausl_organisationen_v.vsd_haus_nr;Haus Nr;Haus Nr
+ausl_organisationen_v.vsd_postfach;Postfach;Postfach
+ausl_organisationen_v.vsd_plz;PLZ;PLZ
+ausl_organisationen_v.vsd_ort;Ort;Ort
+ausl_organisationen_v.vsd_landteil;Landteil;Landteil
+ausl_organisationen_v.vsd_land;Land;Land

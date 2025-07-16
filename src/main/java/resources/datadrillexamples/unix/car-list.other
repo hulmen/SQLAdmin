@@ -1,0 +1,3 @@
+car.mileage between @NUMERIC;Mileage between@ and @NUMERIC;and@  
+and
+car.date between @DATE;Date@ and @DATE;Date@

@@ -1,0 +1,15 @@
+INNER JOIN
+(
+	  SELECT partner_oid
+	  , 	 mitgliedschaftstyp
+	  , 	 jahresbeitrag
+	  , 	 mitgliedschaftsstatus
+	  ,    eintrittsdatum
+    ,    austrittsdatum
+	  FROM   mitglieder_v
+	  WHERE
+#execute(Status;IN;mitgliedschaftsstatus IN;select distinct mitgliedschaftsstatus from mitglieder_v)
+	  AND
+#execute(Typ;IN;mitgliedschaftstyp IN;select distinct mitgliedschaftstyp from mitglieder_v)
+)
+mtg ON  ch_organisationen_v.partner_oid = mtg.partner_oid

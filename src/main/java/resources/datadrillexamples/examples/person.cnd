@@ -1,0 +1,1 @@
+#execute(VIP-Aspekt;IN;vipaspekt_v.name IN;SELECT name FROM gui_vipaspekt_v)

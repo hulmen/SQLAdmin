@@ -1,0 +1,11 @@
+*.class
+*.log
+*.jar
+*.war
+target/
+bin/
+*.iml
+nb*
+derby
+*.exe
+Packages/
