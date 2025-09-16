@@ -165,10 +165,8 @@ public class DataExportGui extends javax.swing.JFrame {
 
         close = new ImageButton(null, "exit.gif", "Exit");
 
-        close.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                close();
-            }
+        close.addActionListener((ActionEvent e) -> {
+            close();
         });
 
         ImageButton export = new ImageButton(null, "export.gif", "Export Data");

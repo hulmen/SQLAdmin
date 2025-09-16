@@ -326,6 +326,7 @@ Admin supports these filetypes to be dropped into its container:
 - txt       --> this will open a sql monitor so you can work on the query
 - image     --> will put the image as a background of SQL admin
 - Excelfile --> will import the excelfile into a db table provided by you
+- CSV       --> will import the CSV-file into a db table provided by you
 
 When  you drop a picture in the background, this picture will be saved as per user, per Server, per Database.
 And the Server and the Database name will be printed on this picture.  This allows to have an own background

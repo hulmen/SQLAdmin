@@ -70,21 +70,23 @@ public class CSVimport {
      * @param fileName the fileName to set
      */
     public void setFileName(String fileName) {
+        logger.log(LOGLEVEL, "Loading {0}", fileName);
         this.fileName = fileName;
     }
 
     /**
-     * @return the fileyType
+     * @return the fileType
      */
-    public String getFileyType() {
-        return fileyType;
+    public String getFileType() {
+        return fileType;
     }
 
     /**
-     * @param fileyType the fileyType to set
+     * @param fileyType the fileType to set
      */
-    public void setFileyType(String fileyType) {
-        this.fileyType = fileyType;
+    public void setFileType(String fileType) {
+        logger.log(LOGLEVEL, "Filetype {0}", fileType);
+        this.fileType = fileType;
     }
 
     /**
@@ -98,6 +100,7 @@ public class CSVimport {
      * @param tableName the tableName to set
      */
     public void setTableName(String tableName) {
+        logger.log(LOGLEVEL, "Tablename {0}", tableName);
         this.tableName = tableName;
     }
 
@@ -112,6 +115,7 @@ public class CSVimport {
      * @param hasHeader the hasHeader to set
      */
     public void setHasHeader(boolean hasHeader) {
+        logger.log(LOGLEVEL, "Header {0}", hasHeader);
         this.hasHeader = hasHeader;
     }
 
@@ -126,6 +130,7 @@ public class CSVimport {
      * @param dropTable the dropTable to set
      */
     public void setDropTable(boolean dropTable) {
+        logger.log(LOGLEVEL, "DropTable {0}", dropTable);
         this.dropTable = dropTable;
     }
 
@@ -140,6 +145,7 @@ public class CSVimport {
      * @param createTable the createTable to set
      */
     public void setCreateTable(boolean createTable) {
+        logger.log(LOGLEVEL, "Create table {0}", createTable);
         this.createTable = createTable;
     }
 
@@ -154,6 +160,7 @@ public class CSVimport {
      * @param cleanTable the cleanTable to set
      */
     public void setCleanTable(boolean cleanTable) {
+        logger.log(LOGLEVEL, "Clean table {0}", cleanTable);
         this.cleanTable = cleanTable;
     }
 
@@ -168,6 +175,7 @@ public class CSVimport {
      * @param runFinisher the runFinisher to set
      */
     public void setRunFinisher(boolean runFinisher) {
+        logger.log(LOGLEVEL, "Run fisnisher script {0}", runFinisher);
         this.runFinisher = runFinisher;
     }
 
@@ -259,7 +267,7 @@ public class CSVimport {
      * @return the con
      */
     public Connection getCon() {
-        logger.log(Level.FINE, "connection is {0}", con == null ? "null" : "established");
+        logger.log(LOGLEVEL, "connection is {0}", con == null ? "null" : "established");
 
         try {
             if ((con == null) || (con.isClosed())) {
@@ -303,9 +311,12 @@ public class CSVimport {
     }
 
     private Logger logger = Logger.getLogger(getClass().getName());
+
+    private static Level LOGLEVEL = Level.FINE;
+
     private String fileName = null;
 
-    private String fileyType = "EXCEL";
+    private String fileType = "EXCEL";
     private String tableName = null;
 
     private boolean hasHeader = false;
@@ -353,11 +364,14 @@ public class CSVimport {
     }
 
     public CSVimport() {
+
+        logger.log(LOGLEVEL, "Starting CSV Import");
         // Standard constructor....
     }
 
     public long readCsvFile() {
 
+        logger.log(LOGLEVEL, "reading CSV file {0}", getFileName());
         // first we check the DB connection
         getCon();
         long numberOfRecords = 0;
@@ -365,7 +379,7 @@ public class CSVimport {
             Reader reader = new InputStreamReader(new FileInputStream(getFileName()));
             Iterable<CSVRecord> records = null;
 
-            switch (getFileyType().toUpperCase()) {
+            switch (getFileType().toUpperCase()) {
                 case "DEFAULT":
                     records = CSVFormat.DEFAULT.parse(reader);
                     break;
@@ -412,6 +426,7 @@ public class CSVimport {
             for (CSVRecord record : records) {
 
                 numberOfRecords = record.getRecordNumber();
+                logger.log(LOGLEVEL, "Recordnumber: {0}", numberOfRecords);
                 if (headerFields == null) {
                     headerFields = new String[record.size()];
                     for (int i = 0; i < record.size(); i++) {
@@ -424,11 +439,15 @@ public class CSVimport {
                     createWriter(headerFields);
 
                     if (!isHasHeader()) {
-                        writeLine(record.getRecordNumber(), record);
+                        if (!writeLine(record.getRecordNumber(), record)) {
+                            break;
+                        }
                     }
 
                 } else {
-                    writeLine(record.getRecordNumber(), record);
+                    if (!writeLine(record.getRecordNumber(), record)) {
+                        break;
+                    }
                 }
             }
 
@@ -575,7 +594,7 @@ public class CSVimport {
                         setDropper(getCon().prepareStatement("drop table " + getTableName()));
                         resultCounter = getDropper().executeUpdate();
                         if (resultCounter > 0) {
-                            logger.log(Level.INFO, " Table {0} dropped", getTableName());
+                            logger.log(LOGLEVEL, " Table {0} dropped", getTableName());
                         }
                     } catch (SQLException dropperEx) {
                         logger.log(Level.WARNING, "Table {0} can not be dropped, {1}", new Object[]{getTableName(), dropperEx.getMessage()});
@@ -589,7 +608,7 @@ public class CSVimport {
                             setDropper(getCon().prepareStatement("drop table " + getTableName()));
                             resultCounter = getDropper().executeUpdate();
                             if (resultCounter > 0) {
-                                logger.log(Level.INFO, " Table {0} dropped", getTableName());
+                                logger.log(LOGLEVEL, " Table {0} dropped", getTableName());
                             }
                         } catch (SQLException dropperEx) {
                             logger.log(Level.WARNING, "Table {0} can not be dropped, {1}", new Object[]{getTableName(), dropperEx.getMessage()});
@@ -601,7 +620,7 @@ public class CSVimport {
                             setCreator(getCon().prepareStatement(createQuery.toString()));
                             resultCounter = getCreator().executeUpdate();
                             if (resultCounter > 0) {
-                                logger.log(Level.INFO, " Table {0} created", getTableName());
+                                logger.log(LOGLEVEL, " Table {0} created", getTableName());
                             }
                         } catch (SQLException creatorException) {
                             logger.log(Level.WARNING, "Table {0} can not be created, {1}", new Object[]{getTableName(), creatorException.getMessage()});
@@ -615,7 +634,7 @@ public class CSVimport {
                         setCleaner(getCon().prepareStatement("truncate table " + getTableName()));
                         resultCounter = getCleaner().executeUpdate();
                         if (resultCounter > 0) {
-                            logger.log(Level.INFO, "Table {0} cleaned", getTableName());
+                            logger.log(LOGLEVEL, "Table {0} cleaned", getTableName());
                         }
                     }
                 } catch (SQLException cleanerException) {
@@ -628,19 +647,20 @@ public class CSVimport {
                 logger.log(Level.SEVERE, "SQL Exception {0}", sqlex.getMessage());
             }
         } else {
-            logger.log(Level.FINE, "createQuery:\n{0}\ncreateWriter:\n{1}", new Object[]{createQuery.toString(), writeQuery.toString()});
+            logger.log(LOGLEVEL, "createQuery:\n{0}\ncreateWriter:\n{1}", new Object[]{createQuery.toString(), writeQuery.toString()});
         }
     }
 
-    private void writeLine(long recordNumber, CSVRecord record) {
-
+    private boolean writeLine(long recordNumber, CSVRecord record) {
+        boolean success = true;
+        logger.log(LOGLEVEL, "writing record {0}", String.format("%,d", recordNumber));
         if (getCon() == null) {
             System.out.print(String.format("%,d", recordNumber) + "\t");
             for (int i = 0; i < record.size(); i++) {
                 System.out.print(record.get(i) + "\t");
             }
             System.out.println();
-            return;
+            return false;
         }
         try {
             for (int i = 0; i < record.size(); i++) {
@@ -650,14 +670,16 @@ public class CSVimport {
             // we add to batch
             getWriter().addBatch();
 
-            if (recordNumber > getBatchSize()) {
+            if (recordNumber % getBatchSize() == 0) {
                 getWriter().executeBatch();
                 logger.log(Level.INFO, "{0} written", String.format("%,d", recordNumber));
             }
 
         } catch (SQLException sqlex) {
             logger.log(Level.WARNING, "SQL Exception {0}", sqlex.getMessage());
+            success = false;
         }
+        return success;
     }
 
     private String fixField(String field) {
@@ -767,10 +789,10 @@ public class CSVimport {
             }
 
             if (cmd.hasOption("bulk")) {
-                
+
                 /*
                 If a directory must be processed, we loop it here
-                */
+                 */
                 String directory = null;
                 String pattern = null;
 
@@ -789,7 +811,7 @@ public class CSVimport {
                 try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(directory))) {
                     for (Path path : stream) {
                         if (!Files.isDirectory(path)) {
-                           
+
                             Pattern p = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
                             Matcher m = p.matcher(path.getFileName().toString());
                             if (m.matches()) {
@@ -868,4 +890,5 @@ public class CSVimport {
     public void setQuote(String quote) {
         this.quote = quote;
     }
+
 }

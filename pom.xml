@@ -366,6 +366,22 @@
             <version>2.23.1</version>
         </dependency>
         
+        <!-- https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser -->
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>5.3</version>
+        </dependency>
+        
+        
+        <!-- https://mvnrepository.com/artifact/com.manticore-projects.jsqlformatter/jsqlformatter -->
+        <dependency>
+            <groupId>com.manticore-projects.jsqlformatter</groupId>
+            <artifactId>jsqlformatter</artifactId>
+            <version>5.3</version>
+        </dependency>
+        
+        
     </dependencies>
 	  
 	  

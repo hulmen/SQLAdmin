@@ -286,7 +286,7 @@ public class Admin extends JFrame implements ActionListener {
 
     }
 
-    private static final String ADMIN_VERSION = "Version 5.2.9 2025-03-20";
+    private static final String ADMIN_VERSION = "Version 5.2.10 2025-08-27";
     LoadImage loadImage = new LoadImage();
 
     /**
@@ -1238,141 +1238,171 @@ public class Admin extends JFrame implements ActionListener {
 
     }
 
+    Thread csvRunner = null;
+
     private void loadCsvFile(File file) {
-        JDialog csvdialog = new JDialog(this, "Load " + file.getAbsolutePath(), true);
-        JPanel panel = new JPanel();
-        panel.setBorder(new EtchedBorder());
-        panel.setLayout(new FlowLayout());
-        JTextField tablename = new JTextField(30);
-        JTextField finisherprocedure = new JTextField(30);
+        csvRunner = null;
+        SwingUtilities.invokeLater(() -> {
+            JDialog csvdialog = new JDialog(this, "Load " + file.getAbsolutePath(), false);
+            JPanel panel = new JPanel();
+            panel.setBorder(new EtchedBorder());
+            panel.setLayout(new FlowLayout());
+            JTextField tablename = new JTextField(30);
+            JTextField finisherprocedure = new JTextField(30);
 
-        JComboBox filetype = new JComboBox(new String[]{"Default", "Excel", "Informix", "Informix_CSV", "Mongo_CSV", "Mongo_TSV", "MySQL", "Oracle", "PostgresSQL_CSV", "PostgresSQL_TEXT", "RFC4180", "TDF"});
+            JComboBox filetype = new JComboBox(new String[]{"Default", "Excel", "Informix", "Informix_CSV", "Mongo_CSV", "Mongo_TSV", "MySQL", "Oracle", "PostgresSQL_CSV", "PostgresSQL_TEXT", "RFC4180", "TDF"});
 
-        JCheckBox hasHeader = new JCheckBox("first line is header", true);
-        JCheckBox cleanTable = new JCheckBox("clean destination table", true);
-        JCheckBox dTable = new JCheckBox("drop table if exists", false);
-        JCheckBox createTable = new JCheckBox("create table if not exists", false);
+            JCheckBox hasHeader = new JCheckBox("first line is header", true);
+            JCheckBox cleanTable = new JCheckBox("clean destination table", true);
+            JCheckBox dTable = new JCheckBox("drop table if exists", false);
+            JCheckBox createTable = new JCheckBox("create table if not exists", false);
 
-        JPanel boxPanel = new JPanel();
-        boxPanel.setLayout(new GridBagLayout());
-        boxPanel.setBorder(new EtchedBorder());
-        GridBagConstraints gbc;
-        Insets insets = new Insets(1, 1, 1, 1);
-        gbc = new GridBagConstraints();
-        gbc.insets = insets;
+            JPanel boxPanel = new JPanel();
+            boxPanel.setLayout(new GridBagLayout());
+            boxPanel.setBorder(new EtchedBorder());
+            GridBagConstraints gbc;
+            Insets insets = new Insets(1, 1, 1, 1);
+            gbc = new GridBagConstraints();
+            gbc.insets = insets;
 
-        gbc.weightx = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        boxPanel.add(hasHeader, gbc);
-        gbc.gridy = 1;
-        boxPanel.add(cleanTable, gbc);
-        gbc.gridy = 2;
-        boxPanel.add(dTable, gbc);
-        gbc.gridy = 3;
-        boxPanel.add(createTable, gbc);
+            gbc.weightx = 1.0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.fill = GridBagConstraints.NONE;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            boxPanel.add(hasHeader, gbc);
+            gbc.gridy = 1;
+            boxPanel.add(cleanTable, gbc);
+            gbc.gridy = 2;
+            boxPanel.add(dTable, gbc);
+            gbc.gridy = 3;
+            boxPanel.add(createTable, gbc);
 
-        ImageButton load = new ImageButton(null, "load.gif", "load this file into the table");
-        ImageButton exit = new ImageButton(null, "exit.gif", "do not load");
+            ImageButton load = new ImageButton(null, "load.gif", "load this file into the table");
+            ImageButton exit = new ImageButton(null, "exit.gif", "do not load");
 
-        load.addActionListener((ActionEvent e) -> {
-            CSVimport csvLoader = new CSVimport();
+            load.addActionListener((ActionEvent e) -> {
 
-            csvLoader.setFileName(file.getAbsolutePath());
+                csvRunner = new Thread() {
+                    public void run() {
+                        CSVimport csvLoader = new CSVimport();
 
-            csvLoader.setCleanTable(cleanTable.isSelected());
-            csvLoader.setCreateTable(createTable.isSelected());
-            csvLoader.setDropTable(dTable.isSelected());
-            csvLoader.setHasHeader(hasHeader.isSelected());
-            if (finisherprocedure.getText().isBlank()) {
-                csvLoader.setRunFinisher(false);
-                csvLoader.setFinisherProcedure(null);
-            } else {
-                csvLoader.setRunFinisher(true);
-                csvLoader.setFinisherProcedure(finisherprocedure.getText());
-            }
+                        csvLoader.setFileName(file.getAbsolutePath());
 
-            if (!tablename.getText().isBlank()) {
-                csvLoader.setTableName(tablename.getText());
-                long l = csvLoader.readCsvFile();
-                JOptionPane.showMessageDialog(null, "Loaded " + String.format("%,d", hasHeader.isSelected() ? l - 1 : l) + " Rows into " + tablename.getText(), "Message", JOptionPane.INFORMATION_MESSAGE);
-            }
+                        csvLoader.setCleanTable(cleanTable.isSelected());
+                        csvLoader.setCreateTable(createTable.isSelected());
+                        csvLoader.setDropTable(dTable.isSelected());
+                        csvLoader.setFieldType(filetype.getSelectedItem().toString());
 
-            csvdialog.dispose();
+                        csvLoader.setHasHeader(hasHeader.isSelected());
+                        if (finisherprocedure.getText().isBlank()) {
+                            csvLoader.setRunFinisher(false);
+                            csvLoader.setFinisherProcedure(null);
+                        } else {
+                            csvLoader.setRunFinisher(true);
+                            csvLoader.setFinisherProcedure(finisherprocedure.getText());
+                        }
+
+                        csvLoader.setFieldType((String) filetype.getSelectedItem());
+
+                        if (!tablename.getText().isBlank()) {
+                            csvLoader.setTableName(tablename.getText());
+
+                            long l = csvLoader.readCsvFile();
+                            JOptionPane.showMessageDialog(null, "Loaded " + String.format("%,d", hasHeader.isSelected() ? l - 1 : l) + " Rows into " + tablename.getText(), "Message", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                };
+                csvRunner.setUncaughtExceptionHandler(new GlobalExceptionHandler());
+                csvRunner.start();
+            });
+
+            exit.addActionListener((ActionEvent e) -> {
+                if ((csvRunner != null) && (csvRunner.isAlive())) {
+                    JOptionPane.showMessageDialog(null, "CSV import is still running", "Message", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    csvdialog.dispose();
+                }
+            });
+
+            JPanel textPanel = new JPanel();
+            textPanel.setLayout(new GridBagLayout());
+            textPanel.setBorder(new EtchedBorder());
+
+            insets = new Insets(1, 1, 1, 1);
+            gbc = new GridBagConstraints();
+            gbc.insets = insets;
+
+            gbc.weightx = 1.0;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.fill = GridBagConstraints.NONE;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 2;
+            textPanel.add(new JLabel("Destination table"), gbc);
+            gbc.gridy = 1;
+            textPanel.add(tablename, gbc);
+            gbc.gridy = 2;
+            textPanel.add(new JLabel("Finisher procedure"), gbc);
+            gbc.gridy = 3;
+            textPanel.add(finisherprocedure, gbc);
+            gbc.gridy = 4;
+            gbc.gridwidth = 1;
+            textPanel.add(new JLabel("CSV file type"), gbc);
+            gbc.gridy = 4;
+            gbc.gridx = 1;
+            textPanel.add(filetype, gbc);
+
+            panel.add(textPanel);
+            panel.add(boxPanel);
+            panel.add(load);
+            panel.add(exit);
+
+            csvdialog.add(panel);
+            csvdialog.pack();
+            csvdialog.setLocation(MouseInfo.getPointerInfo().getLocation());
+
+            csvdialog.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {
+
+                }
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    if ((csvRunner != null) && (csvRunner.isAlive())) {
+                        JOptionPane.showMessageDialog(null, "CSV import is still running", "Message", JOptionPane.INFORMATION_MESSAGE);
+                    } 
+                }
+
+                @Override
+                public void windowClosed(WindowEvent e) {
+
+                }
+
+                @Override
+                public void windowIconified(WindowEvent e) {
+
+                }
+
+                @Override
+                public void windowDeiconified(WindowEvent e) {
+
+                }
+
+                @Override
+                public void windowActivated(WindowEvent e) {
+
+                }
+
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+
+                }
+            });
+
+            csvdialog.setVisible(true);
         });
-
-        tablename.addActionListener((ActionEvent e) -> {
-            CSVimport csvLoader = new CSVimport();
-
-            csvLoader.setFileName(file.getAbsolutePath());
-
-            csvLoader.setCleanTable(cleanTable.isSelected());
-            csvLoader.setCreateTable(createTable.isSelected());
-            csvLoader.setDropTable(dTable.isSelected());
-            csvLoader.setHasHeader(hasHeader.isSelected());
-            if (finisherprocedure.getText().isBlank()) {
-                csvLoader.setRunFinisher(false);
-                csvLoader.setFinisherProcedure(null);
-            } else {
-                csvLoader.setRunFinisher(true);
-                csvLoader.setFinisherProcedure(finisherprocedure.getText());
-            }
-
-            csvLoader.setFieldType((String) filetype.getSelectedItem());
-
-            if (!tablename.getText().isBlank()) {
-                csvLoader.setTableName(tablename.getText());
-                long l = csvLoader.readCsvFile();
-                JOptionPane.showMessageDialog(null, "Loaded " + String.format("%,d", hasHeader.isSelected() ? l - 1 : l) + " Rows into " + tablename.getText(), "Message", JOptionPane.INFORMATION_MESSAGE);
-            }
-
-            csvdialog.dispose();
-            csvdialog.dispose();
-        });
-
-        exit.addActionListener((ActionEvent e) -> {
-            csvdialog.dispose();
-        });
-
-        JPanel textPanel = new JPanel();
-        textPanel.setLayout(new GridBagLayout());
-        textPanel.setBorder(new EtchedBorder());
-
-        insets = new Insets(1, 1, 1, 1);
-        gbc = new GridBagConstraints();
-        gbc.insets = insets;
-
-        gbc.weightx = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        textPanel.add(new JLabel("Destination table"), gbc);
-        gbc.gridy = 1;
-        textPanel.add(tablename, gbc);
-        gbc.gridy = 2;
-        textPanel.add(new JLabel("Finisher procedure"), gbc);
-        gbc.gridy = 3;
-        textPanel.add(finisherprocedure, gbc);
-        gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        textPanel.add(new JLabel("CSV file type"), gbc);
-        gbc.gridy = 4;
-        gbc.gridx = 1;
-        textPanel.add(filetype, gbc);
-
-        panel.add(textPanel);
-        panel.add(boxPanel);
-        panel.add(load);
-        panel.add(exit);
-
-        csvdialog.add(panel);
-        csvdialog.pack();
-        csvdialog.setLocation(MouseInfo.getPointerInfo().getLocation());
-        csvdialog.setVisible(true);
 
     }
 
@@ -1668,7 +1698,7 @@ public class Admin extends JFrame implements ActionListener {
 
                         // verifying Data Type Mappings
                         ReadJdbcTypeMapping rtm = new ReadJdbcTypeMapping(getProductName());
-                        
+
                         TypeMapping tm = new TypeMapping(getProductName());
                         jdbctypemapping = tm.getMapping();
 
@@ -5262,7 +5292,7 @@ public class Admin extends JFrame implements ActionListener {
      * @return the jdbctypemapping
      */
     public static HashMap<String, JdbcTypeMapping> getJdbctypemapping() {
-        if (jdbctypemapping == null) {           
+        if (jdbctypemapping == null) {
             TypeMapping tm = new TypeMapping(getProductName());
             jdbctypemapping = tm.getMapping();
         }

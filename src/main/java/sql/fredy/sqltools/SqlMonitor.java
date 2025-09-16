@@ -86,6 +86,8 @@ import sql.fredy.ui.CloseableFrame;
 import sql.fredy.ui.DataBaseExportGui;
 import sql.fredy.ui.RunningJobsSystemTray;
 
+import com.manticore.jsqlformatter.JSQLFormatter;
+
 public class SqlMonitor extends JPanel implements Runnable {
 
     final static int NUMBER_OF_AUTOSAVE = 25;  // we keep 25 files back.....
@@ -1209,6 +1211,7 @@ public class SqlMonitor extends JPanel implements Runnable {
         KeyStroke ctrlF = KeyStroke.getKeyStroke("control F");
         KeyStroke ctrlH = KeyStroke.getKeyStroke("control H");
         KeyStroke ctrlP = KeyStroke.getKeyStroke("control P");
+        KeyStroke ctrlShiftF = KeyStroke.getKeyStroke("control shift F");
         KeyStroke f5 = KeyStroke.getKeyStroke("F5");
         KeyStroke altEnt = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.ALT_DOWN_MASK);
         KeyStroke altR = KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.ALT_DOWN_MASK);
@@ -1220,6 +1223,7 @@ public class SqlMonitor extends JPanel implements Runnable {
         iMap.put(f5, "F5");
         iMap.put(altEnt, "alt-Enter");
         iMap.put(altR, "alt-R");
+        iMap.put(ctrlShiftF, "ctrl-shift-F");
 
         Action executeAction = new AbstractAction() {
             @Override
@@ -1278,6 +1282,21 @@ public class SqlMonitor extends JPanel implements Runnable {
             }
         };
 
+        Action formatAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    // I'm adding the content to the buffer, before pretty printing...
+                    String s = query.getText();
+                    StringSelection ss = new StringSelection(s);
+                    tk.getSystemClipboard().setContents(ss, ss);
+                    query.setText(JSQLFormatter.format(query.getText()));
+                } catch (Exception ex) {
+                    logger.log(Level.WARNING, "Exception while formating SQL command: " + ex.getMessage());
+                }
+            }
+        };
+
         aMap.put("F5", executeAction);
         aMap.put("ctrl-S", searchAction);
         aMap.put("ctrl-F", searchAction);
@@ -1285,6 +1304,7 @@ public class SqlMonitor extends JPanel implements Runnable {
         aMap.put("ctrl-P", printAction);
         aMap.put("alt-Enter", partialExecution);
         aMap.put("alt-R", caretPositionExecution);
+        aMap.put("ctrl-shift-F", formatAction);
     }
 
     public void showHelp() {
@@ -1325,6 +1345,7 @@ public class SqlMonitor extends JPanel implements Runnable {
         help.append("Type Control S to open the Search Window\n");
         help.append("Type Control F to open the Search Window\n");
         help.append("Type Control P to print\n");
+        help.append("Type Control Shift F to pretty print the SQL code (original content will be put into the clipboard)\n");
         help.append("Do code completion with CTRL-SPACE, the SQL 2000 standard is already there. \nExtend on your own: right click and select 'Code Completion'\n");
         help.append("To set the max column width to be displayed, set the environment variable sql.fredy.sqltools.maxcolumnwidth with the desired value");
 

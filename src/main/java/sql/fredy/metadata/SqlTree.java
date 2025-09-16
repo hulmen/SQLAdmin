@@ -2697,10 +2697,12 @@ public class SqlTree extends JPanel implements Runnable, FocusListener {
                     DbTreeNode d = (DbTreeNode) dmt.getChildAt(i);
                     d.setFIXSPACES(false);
                     if (i > 0) {
-                        sl.append(",\n");
+                        sl.append("\n\t,");
+                    } else {
+                       sl.append("\t "); 
                     }
                     if (d.getType().equalsIgnoreCase(DbTreeNode.TYPE_COLUMN)) {
-                        sl.append(" ").append(aliasTxt).append(dot).append(fixSpaces(d.getColumnName()));
+                        sl.append(aliasTxt).append(dot).append(fixSpaces(d.getColumnName()));
                     }
                 }
 
