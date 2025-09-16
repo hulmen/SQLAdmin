@@ -1,0 +1,333 @@
+Fredy's Admin Tool
+------------------
+Admin is a Tool around JDBC-enabled SQL-Databases to do basic jobs
+for DB-Administrations, like:
+- create/ drop tables
+- create  indices
+- perform sql-statements
+- simple form
+- a guided query
+- Data Export
+and a other usefull things in DB-arena
+
+
+
+License:
+--------
+    Admin is free Software. 
+
+    Copyright (C) 2017 - 2024 Fredy Fischer
+
+    sql@hulmen.ch
+
+    www.hulmen.ch
+
+
+    Fredy Fischer
+    Hulmenweg 36
+    8405 Winterthur
+    Switzerland
+
+ 
+   Permission is hereby granted, free of charge, to any person obtaining a copy 
+   of this software and associated documentation files (the "Software"), to deal
+   in the Software without restriction, including without limitation the rights
+   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   copies of the Software, and to permit persons to whom the Software is
+   furnished to do so, subject to the following conditions:
+ 
+   The above copyright notice and this permission notice shall be included in
+   all copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   SOFTWARE.
+
+
+Structure
+---------
+Admin consists out of two parts:
+
+1) The Admin Tool
+2) Application Part
+
+
+Admin Tool
+----------
+Admin is heavily based onto MetaData of a database. If these data are not available
+or not complete, not all functions of Admin will work.
+
+Admin is divided into these packages:
+
+sql.fredy.admin	    the main Class of the Project
+
+sql.fredy.share     a part containing classes needed by all 
+        packages. These are some classes hardly to sort different
+
+sql.fredy.tools     contains the Logserver I wrote. SimpleLogServer
+        and all its related classes
+
+sql.fredy.io	    contains all classes I need to handle IO-related questions
+
+sql.fredy.sqltools  all the tools needed form DDL and DML
+
+sql.fredy.metadata  these are the classes used to collect metadata information
+
+sql.fredy.ui	    some user interface related classes
+
+sql.fredy.generate  the classes I use to generate Java-Code
+
+
+
+Prerequisits
+------------
+Minimum:
+* java in version 17 and higher (http://openjdk.org)
+* a JDBC-Driver for your RDBMS
+
+
+Data Exporter:
+DataExporter exports data into CSV, XML and XLS, if you want to
+have XLS-files, you need to add POI to your CLASSPATH
+* POI from http://jakarta.apache.org/poi
+
+
+Since Version 5.0 Admin is based on Maven.
+There are three ways to use Admin
+
+1. Create/use the installer for Windows
+---------------------------------------
+Create a package with this command out of the root-directory: 
+jpackage --input .\target 
+         --main-jar SqlAdmin-jar-with-dependencies.jar 
+         --name SqlAdmin
+         --main-class sql.fredy.admin.Admin 
+         --app-version 5.0 
+         --win-dir-chooser
+         --win-menu --win-shortcut 
+         --install-dir SqlAdmin 
+         --type msi 
+         --copyright "Fredy Fischer" 
+         --description "JDBC based DB Administration"
+
+or if you have it downloaded just run the MSI file to install it
+
+2. Use the jar-file containing all the dependencies
+---------------------------------------------------
+java -jar SqlAdmin-jar-with-dependencies.jar
+
+It contains all the libraries to run Admin and also some JDBC-Drivers.  Be aware, that some licenses might apply
+- MySQL
+- PostgreSQL
+- Apache Derby
+- Microsoft SQL Server
+- SQLite
+
+IF you need to use others, please add the JDBC-Drivers to the CLASSPATH or extend the pom-file and recrecate Admin.
+
+3. Use the jar-file containing Admin only
+-----------------------------------------
+You need to set the CLASSPATH on your own containing all the libraries you need. These are:
+- the libraries SqlAdmin needs to run by itself
+- the required JDBC-Drvier(s)
+
+Libraries Admin needs ( as from the pom-file from the sources )
+
+Apache Derby is needed because many configuration is stored in an Apache Derby DB and also your query-history is there.
+Without Derby, Admin will not work
+
+Admin uses Apache dbcp2 to create the connections to the DB, so please get these:
+To generate XLSX-files, we need apache poi
+
+For the SQLmonitor, we need the libraries from FifeSoft
+
+If you want to use the Jasper-things to create report, then add these libraries. To be honest, 
+I did not do a lot of tests with them.
+
+
+Starting Admin
+--------------
+
+ To run the project from the command line, go to the installed folder and
+ type the following:
+
+ java -cp SqlAdmin-jar-with-dependencies.jar 
+
+
+   This launches Admin with the standard values. 
+   Admin creates to property files:
+   - admin.props
+   - adminlnf.props
+     
+
+   These files are stored by default in the users home directory.
+   You can change this behaviour like this:
+   change the user.home property of java:  
+
+       java -Duser.home=MYDIRECTORY sql.fredy.admin.Admin
+
+   or
+
+       java -Dadmin.work=MYDIRECTORY sql.fredy.admin.Admin
+
+Environment Variables to control admin:
+---------------------------------------
+- Port of the internally used Derby DB is set per default to 60606, you can change it with the environment variable sql.fred.sqltool.derbyport
+- The max. length of a column in the sql panel is set per default to 750, you can change it with the environment variable sql.fredy.sqltool.maxcolumnwidth
+- Admin uses a console windows to redirect log-messages, if you want to avoid this, add the variable sql.fredy.admin.encapsulate.logger=n  all other letters or without this,
+  the internal console window is used. The JAva-Option overwrites the OS-Option
+
+- These might be OS-environment or JVM environment variables
+
+
+within the property-files directory, there will be a created this structure:
+user.home/sqladmin/autosave
+       work/SQLAdminworkDB
+
+sql.fredy.admin.encapsulate.logger=n   to print logging messages to standardout and not to the admin-console,
+                                       if this is not set all messages are redirected to the console window.
+                               
+sql.fredy.sqltool.maxcolumnwidth=500   to set the max columnwidth within the query result. Default 750                                
+sql.fredy.admin.internaldb.upgrade=n   the internal DB is upgraded automatically, if you do not want to do this, set this switch
+                                       if you feel unsafe, backup the internal Derby Database
+sql.fredy.admin.internaldb=y           to activate the view to the internal derby-DB
+ 
+sql.fredy.admin.configdb               gives the name of the Apache Derby config DB if not provided it is uing
+                                       from environment admin.work and if not user.home -> [directory]/sqladmin/work/SQLAdminWorkDB
+
+SQLMonitor
+----------
+The SQLMonitor stores every command sent to the DB within a Derby-DB  ( https://db.apache.org/derby)
+You find this history by rightclicking within the SQLMonitor window. 
+The DB is created in user.home/sqladmin/work and the name of the DB is SQLAdminworkDB. 
+This internal DerbyServer is listening on port 60606
+
+When you select 'quicksave' within the SQLMonitor, this files go to user.home/sqladmin/
+and the content of the SQLMOnitor is regularly saved automatically every 15 minutes in the
+autosave directory and the last 25 files are kept, per DB.
+
+SQLMonitor can generate code out of a DB-Table or a query. It generates pieces of code, I use the
+do JSF and swing development. 
+
+WebApplications
+---------------
+From within the SqlMonitor, you can create CRUD-web applications based onJSF and Primefaces libraries.
+It generates 
+- a POJO representing a table/view/query
+- a managed bean to make the POJO statefull
+- a JSF-page to llist the content of the table and a CRUD-functionality.
+Check the website https://hulmen.ch for details
+
+
+Applications Part
+-----------------
+This you only need, if you intend to generate Java-Code out of Admin.
+Admin has a function, that creates Java-Code out of a table. It does
+the following classes for each table of a certain database:
+
+a)the wrapper file:
+
+The name of that class is Row.java .This code contains for each field 
+in the table a get and a set methode. As well as there are insert, update, 
+save and delete methods and searchBy{Fieldname}-methods.
+
+As well as there is a searchAll-method. These searchXXX-methods are of type
+xxxRow. All searchBy{FieldName}-mathods are as follows:
+
+      public String searchBy(String,boolean)
+
+Where String is the searchpattern and the boolean is to do a search as follows:
+true = exact search (e.g. search * from table where field =
+false= use wildcards (e.g. search * from table where field like
+
+b)the Swing-GUI
+
+The name of that class is Form.java. This is a simple swing-class delivering a gui, 
+as you see it in the screenshots. You can launch this application equal you are 
+launching admin. There is an example, where you see how I did it. It is basically:
+
+      java -Duser.home={userhome} applications.{DB-Name}.{TableName}Formd -h host -u user -p password
+
+c)the JTableModel
+
+The name of this class is TableModel.java. IT allows to write back values to the DB as
+they are changed, if the primarykey is known.
+
+
+These files you best save into the directory ./java/applications. Admin then creates a 
+directory named like the DB-name where it puts all these files into. See the documentation
+codegenerator.pdf for further information.
+
+
+History
+-------
+In the beginnings of Java I had my first look at this exiting product. 
+So I decided to learn more about Java. As beeing a developer for data
+-base-applications and generator in my former life it was a short 
+decision to use a database related case for learning Java. 
+
+So I started 1997 the development of a tool to manipulate mySQL-Datatabass.
+As JDBC (Java Database Connectivity) supports a lot of functions around metadata, 
+it was a good starting point for learning Java.
+
+When Swing came out the GUI-capabilities of Java got much more functionalities. 
+So I choosed Swing as the GUI-representation of my new tool.
+
+The first steps with Java where pretty hard for a procedural software developper 
+I was of about then years, but thanks to the help of some friends I got my first 
+impression of how object oriented programming probably looks like and was able to 
+implement the first function. To really get on speed I did not choose a 'Hello World'
+thing, I directly jumped into the development of the 'Guided-Query'-class. 
+While doing so, I had to learn how Java handels Meta-Data and how these layout-managers
+works to create my first Swing-GUI.
+
+While time was passing by, Admin got more and more functions and thanks to the 
+JDBC-concept it was able to support other databases. 
+Today I did some tests with mySQL, PostgreSQL, InstantDB, HypersonicSQL, Oracle and Empress. 
+
+As the intention of the project is to learn about Java I put it under open-source. 
+To publish this tool I became a member of the organization trash.net .
+
+Admin is absolutely free for download and use.
+Admin offers today the following functions:
+
+    * Create Table
+    * Create Index
+    * Drop Table
+    * Modify Table
+    * Guided Query
+    * SQL-Monitor
+    * Dynamic online form
+    * Generate Java Code out of a XML-File 
+      (a Relational-Object-Wrapper and a Swing-Form and a JTableModel)
+    * Meta-Data Info of a DB
+    * DataExport into various formats
+
+
+All the windows are generated as panels, so they are able to run as standalone also
+Such a tool is an ongoing project and probably I get some input from you.
+
+Today Admin has been downloaded several thousand times and I got a lot of contacts 
+to the internet-community from allover the world.
+
+I'd be happy if you have a look at the product and to get some response and 
+ideas to make the tool more powerfull.
+
+
+Drop a file
+-----------
+Admin supports these filetypes to be dropped into its container:
+
+- sql       --> this will open a sql monitor so you can work on the query
+- txt       --> this will open a sql monitor so you can work on the query
+- image     --> will put the image as a background of SQL admin
+- Excelfile --> will import the excelfile into a db table provided by you
+- CSV       --> will import the CSV-file into a db table provided by you
+
+When  you drop a picture in the background, this picture will be saved as per user, per Server, per Database.
+And the Server and the Database name will be printed on this picture.  This allows to have an own background
+per server and db you are connecting to
